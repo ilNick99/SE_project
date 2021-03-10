@@ -1,6 +1,7 @@
 package Version_2;
 
 import Utility.Reader;
+import Version_2.Pair;
 
 import java.util.ArrayList;
 

@@ -1,10 +1,10 @@
 package Version_2;
 
-import Utility.JsonReader;
 import Utility.Reader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class NetManager {
 
     private ArrayList<Net> netList = new ArrayList<Net>();
 
-    public void menageOption() throws FileNotFoundException {
+    public void menageOption() throws IOException {
         boolean check = true;
         int choise = 0;
         do {
@@ -67,13 +67,14 @@ public class NetManager {
     /**
      * this method allows to add a new net
      */
-    public void addNet() {
+    public void addNet() throws IOException {
         do {
             //the name is required to use the constructor where there is the request to insert the pairs
             Net n = new Net(Reader.ReadString(NAME_OF_NET));
             //We check if the net has pendant pair or not
             if (checkNet(n)) {
                 netList.add(n);
+                JsonWriter.writeJsonFile(n);
             }
         } while (Reader.yesOrNo(ANOTHER_NET));
     }
@@ -113,7 +114,7 @@ public class NetManager {
      */
     public boolean checkNet(Net n) {
         //we call the method in the Net class which check if there are some pendant pairs
-        if (n.checkPendantNode() == false) {
+        if (!n.checkPendantNode()) {
 
             System.out.println(THE_NET_IS_INCORRECT);
             return false;
@@ -142,7 +143,7 @@ public class NetManager {
     }
 
     public void loadNet() throws FileNotFoundException {
-        File directory = new File("src/main/java/Json");
+        File directory = new File("FileJson");
         String[] pathname = directory.list();
         int i = 0;
         for (String s : pathname) {
@@ -153,11 +154,11 @@ public class NetManager {
             System.out.println("There aren't any files to load");
         } else {
             int number = Reader.leggiIntero("Insert the id of the file you want to load ", 1, i);
-            String path = "src/main/java/Json/" + pathname[number - 1];
+            String path = "FileJson/" + pathname[number - 1];
             Net newNet = JsonReader.readJson(path);
             netList.add(newNet);
             System.out.println("File is loaded");
-            System.out.println("Visualizzazione della lista");
+            System.out.println("List view");
             showNet(newNet);
         }
     }
@@ -193,7 +194,7 @@ public class NetManager {
             couples.add(couple);
         }
 
-        System.out.println("\nName net: " + nameNet + "\tID net: " + idNet);
+        System.out.println("\nName net: " + nameNet + "\t\tID net: " + idNet);
         System.out.println("List pairs:");
         for (String s : couples) {
             System.out.println("\t" + s);
