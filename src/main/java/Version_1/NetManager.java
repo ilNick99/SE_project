@@ -1,12 +1,11 @@
 package Version_1;
 
-import Utility.JsonReader;
-import Utility.JsonWriter;
 import Utility.Reader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -85,11 +84,12 @@ public class NetManager {
         }
     }
 
-    public void loadNet() throws FileNotFoundException {
-        File directory = new File("src/main/java/Json");
-        String[] pathname = directory.list();
+    public void loadNet() throws IOException {
+        String pathAbsol = new File("FileJson").getAbsolutePath();
+        File directory = new File(pathAbsol);
+        String[] listOfFile = directory.list();
         int i = 0;
-        for (String s: pathname) {
+        for (String s: listOfFile) {
             i++;
             System.out.println(i+") "+s);
         }
@@ -98,11 +98,11 @@ public class NetManager {
         }
         else {
             int number = Reader.leggiIntero("Insert the id of the file you want to load ", 1, i);
-            String path = "src/main/java/Json/"+pathname[number-1];
+            String path = "FileJson/"+listOfFile[number-1];
             Net newNet = JsonReader.readJson(path);
             netList.add(newNet);
             System.out.println("File is loaded");
-            System.out.println("Visualizzazione della lista");
+            System.out.println("List view");
             showNet(newNet);
         }
     }

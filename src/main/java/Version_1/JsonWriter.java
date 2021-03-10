@@ -1,9 +1,6 @@
-package Utility;
+package Version_1;
 
-import Version_1.Net;
-import Version_1.Pair;
-import Version_1.Place;
-import Version_1.Transition;
+import Utility.Reader;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,7 +12,7 @@ import java.util.ArrayList;
 public class JsonWriter {
     public static final String WRITING_FILE_ERROR = "writing file error.";
     //pathname string of the file
-    private static final String path = new File("src/FileJson/").getAbsolutePath();
+    private static final String path = new File("FileJson/").getAbsolutePath();
 
     /**
      * method to write json
