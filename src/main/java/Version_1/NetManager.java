@@ -137,7 +137,7 @@ public class NetManager {
             couples.add(couple);
         }
 
-        System.out.println("\nName net: "+nameNet+"\tID net: "+idNet);
+        System.out.println("\nName net: "+nameNet+"\t\tID net: "+idNet);
         System.out.println("List pairs:");
         for (String s: couples) {
             System.out.println("\t"+s);
