@@ -1,0 +1,14 @@
+{
+  "@name": "reteee",
+  "@net": "reteee1",
+  "@pairs": [
+    {
+      "@place": "n1",
+      "@transition": "t1"
+    },
+    {
+      "@place": "n2",
+      "@transition": "t1"
+    }
+  ]
+}
